@@ -18,7 +18,8 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = 'davinci.monalissa3@gmail.com'
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    # MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_PASSWORD = 'beenieman'
     SUBJECT_PREFIX = 'thePitcher'
     SENDER_EMAIL = 'davinci.monalissa3@gmail.com'
 
