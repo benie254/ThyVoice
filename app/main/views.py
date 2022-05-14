@@ -29,5 +29,16 @@ def profile(uname):
     return render_template('profile/profile.html',user=user)
 
 
+@main.route('/feed', methods=['GET', 'POST'])
+def feed():
+    """
+    :return: index page + data
+    """
+
+    title = 'Feed- ThyVoice!'
+
+    return render_template('feed.html',title=title)
+
+
 
 
