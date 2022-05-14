@@ -21,3 +21,11 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     SUBJECT_PREFIX = 'thePitcher'
     SENDER_EMAIL = 'davinci.monalissa3@gmail.com'
+
+
+class ProdConfig(Config):
+    """
+    production configuration child class
+    """
+
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
