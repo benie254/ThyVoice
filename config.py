@@ -29,3 +29,13 @@ class ProdConfig(Config):
     """
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+
+
+class DevConfig(Config):
+    """
+    development configuration child class
+    """
+
+    DEBUG = True
+
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
