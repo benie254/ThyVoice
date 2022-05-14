@@ -28,7 +28,9 @@ class ProdConfig(Config):
     production configuration child class
     """
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://benie:12345@localhost/sixty'
 
 
 class DevConfig(Config):
