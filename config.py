@@ -39,3 +39,9 @@ class DevConfig(Config):
     DEBUG = True
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+
+
+config_options = {
+'development':DevConfig,
+'production':ProdConfig
+}
