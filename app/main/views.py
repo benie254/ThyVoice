@@ -29,3 +29,5 @@ def profile(uname):
     return render_template('profile/profile.html',user=user)
 
 
+
+
