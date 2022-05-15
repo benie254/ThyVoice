@@ -7,5 +7,49 @@
 {% endblock %}
 
 {%block content%}
-<h1>Profile Page works!</h1>
+
+
+<div class="container" id="profile-container">
+    <div class="row">
+
+<!--        to display username-->
+        <div class="col-md-4" style="background-color:#53131E;color:white;padding-top:1.5%;padding-bottom:1.5%;width:15%;margin-right:15%;font-family: 'Cinzel';">
+            <h3>
+                {{ user.username | capitalize }}
+            </h3>
+
+
+<!--            display user bio-->
+
+            {% if user.bio %}
+            <p style="font-family:'Secular One'">
+                {{ user.bio }}
+            </p>
+            {% else %}
+            <p style="font-family:'Secular One'">
+                {{ user.username | capitalize }} has no bio.
+            </p>
+            {% endif %}
+
+            {% if user == current_user %}
+          <a href="{{ url_for('main.update_profile',uname=user.username) }}" style="margin-top:1.5%;font-family:'Secular One'">
+            Edit Profile
+          </a>
+          {% endif %}
+        </div>
+    </div>
+    {% if current_user %}
+        <h3 class="text-center" style="font-family:'Secular One';">You have {{user.blogs.count()}} Blogs:</h3>
+        {% for i in user_blogs%}
+        <div class="pitches text-center" style="margin-top:2.5%;">
+            <h5 style="font-family: 'Cinzel'">Title: {{i.blog_title}}</h5>
+            <h6 style="font-family: 'Secular One';"><span style="font-family: 'Cinzel'">Message:</span> {{i.blog_content}}</h6>
+        </div>
+
+        {%endfor%}
+    {%else%}
+        <h3>You have ) posts</h3>
+    {%endif%}
+</div>
+
 {%endblock%}
