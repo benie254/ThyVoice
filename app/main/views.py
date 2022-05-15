@@ -15,7 +15,7 @@ def index():
 
     title = 'ThyVoice- Welcome!'
 
-    blogs = Blog.query_all()
+    blogs = Blog.query.all()
     comment_form = CommentForm()
     comments = Comment.query.all()
 
@@ -46,7 +46,7 @@ def profile(uname):
 
 @main.route('/create', methods=['GET', 'POST'])
 @login_required
-def feed():
+def create():
     """
     :return: index page + data
     """
@@ -60,7 +60,7 @@ def feed():
         blog_content = blog_form.blog_content.data
         user_id = current_user._get_current_object().id
 
-        new_blog_dict = BlogForm(blog_title=blog_title, user_id=user_id, blog_category=blog_category,
+        new_blog_dict = Blog(blog_title=blog_title, user_id=user_id, blog_category=blog_category,
                                blog_content=blog_content)
 
         new_blog_dict.save_blog()
@@ -69,7 +69,7 @@ def feed():
 
     title = 'Create Blog- ThyVoice!'
 
-    return render_template('create.html',title=title,blogs=blogs)
+    return render_template('create.html',title=title,blogs=blogs,blog_form=blog_form)
 
 
 

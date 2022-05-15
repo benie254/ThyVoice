@@ -5,7 +5,7 @@ from wtforms.validators import InputRequired
 
 class BlogForm(FlaskForm):
     """
-    creates new pitch objects
+    creates new blog objects
     """
 
     blog_title = StringField('Title')
