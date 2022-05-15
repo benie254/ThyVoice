@@ -3,7 +3,7 @@ from . import main
 from flask_login import login_required,current_user
 from .. import db,photos
 from ..models import User,Blog
-from .forms import BlogForm
+from .forms import BlogForm,CommentForm
 
 
 # views
@@ -15,7 +15,19 @@ def index():
 
     title = 'ThyVoice- Welcome!'
 
-    return render_template('index.html',title=title)
+    comment_form = CommentForm()
+    comments = Comment.query.all()
+
+    if comment_form.validate_on_submit():
+        comment_message = comment_form.message.data
+        comment = Comment(comment_message=comment_message)
+
+        db.session.add(comment)
+        db.session.commit()
+
+        return redirect(url_for('.index'))
+
+    return render_template('index.html',title=title,comments=comments)
 
 
 @main.route('/user/<uname>')
