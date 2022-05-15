@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
 {% endblock %}
 
+
+<div class="conntainer">
+    {{ macro.displayAllBlogs(blogs) }}
+</div>
+
 {%block content%}
 <h1>Home Page works!</h1>
 {%endblock%}
