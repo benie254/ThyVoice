@@ -8,5 +8,15 @@
 {% endblock %}
 
 {%block content%}
-<h1>Feed Page works!</h1>
+
+
+<div class="container" id="pitch-container">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        {{ wtf.quick_form(blog_form) }}
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
 {%endblock%}
