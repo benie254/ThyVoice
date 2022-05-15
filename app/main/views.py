@@ -4,6 +4,7 @@ from flask_login import login_required,current_user
 from .. import db,photos
 from ..models import User,Blog,Comment
 from .forms import BlogForm,CommentForm
+from ..requests import get_quotes
 
 
 # views
@@ -19,6 +20,10 @@ def index():
     comment_form = CommentForm()
     comments = Comment.query.all()
 
+    my_quotes = get_quotes()
+
+    print(my_quotes)
+
     if comment_form.validate_on_submit():
         comment_message = comment_form.comment.data
         comment = Comment(comment_message=comment_message)
@@ -28,7 +33,7 @@ def index():
 
         return redirect(url_for('.index'))
 
-    return render_template('index.html',title=title,blogs=blogs,comments=comments,comment_form=comment_form)
+    return render_template('index.html',title=title,blogs=blogs,comments=comments,comment_form=comment_form,my_quotes=my_quotes)
 
 
 @main.route('/user/<uname>')

@@ -21,3 +21,12 @@ class CommentForm(FlaskForm):
 
     comment = TextAreaField('What are your thoughts on this?')
     submit = SubmitField('Share Comment')
+
+
+class UpdateProfile(FlaskForm):
+    """
+    updates user profile
+    """
+
+    bio = TextAreaField('Tell us about you.', validators=[InputRequired()])
+    submit = SubmitField('Update Profile')
