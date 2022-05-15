@@ -71,29 +71,29 @@ def update_profile(uname):
     return render_template('profile/update.html',user=user,update_form=update_form)
 
 
-@main.route('/user/<user_id>/update',methods=['GET','POST'])
+@main.route('/user/<uname>/update_blog',methods=['GET','POST'])
 @login_required
-def update_blog(user_id):
+def update_blog(uname):
 
-    # user = User.query.filter_by(username=uname).first()
-    user_blog = Blog.query.filter_by(user_id=user_id).first()
+    user = User.query.filter_by(username=uname).first()
+    # user_blog = Blog.query.filter_by(blog_content=blog_content).first()
     user_id = current_user._get_current_object().id
     user_blogs = Blog.query.filter_by(user_id=user_id).all()
 
-    if user_blog is None:
+    if user is None:
         abort(404)
 
     update_blog = UpdateBlog()
 
     if update_blog.validate_on_submit():
-        user_blog.blog_content = update_blog.blog_content.data
+        user.blog_content = update_blog.blog_content.data
 
-        db.session.add(user_blog)
+        db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('.profile',user_id=user_id,user_blog=user_blog,user_blogs=user_blogs))
+        return redirect(url_for('.profile',user_id=user_id,user_blog=user,user_blogs=user_blogs,uname=user.username))
 
-    return render_template('profile/update_blog.html',user_id=user_id,user_blog=user_blog,user_blogs=user_blogs,update_blog=update_blog)
+    return render_template('profile/update_blog.html',user_id=user_id,user_blog=user,user_blogs=user_blogs,update_blog=update_blog,uname=user.username)
 
 
 @main.route('/create', methods=['GET', 'POST'])
