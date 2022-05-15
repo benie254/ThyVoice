@@ -68,7 +68,11 @@ class Comment(db.Model):
     """
 
     __tablename__ = 'comments'
+
     id = db.Column(db.Integer, primary_key=True)
+    comment_message = db.Column(db.String(255))
+    blog_id = db.Column(db.Integer, db.ForeignKey('feed.id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
 
     def __repr__(self):
-        return f"Comment : id: {self.id} comment: {self.description}"
+        return f"Comment : id: {self.id} comment: {self.comment_message}"
