@@ -36,3 +36,27 @@ class User(UserMixin, db.Model):
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
+
+class Blog(db.Model):
+    """
+    defines Blog objects
+    """
+
+    __tablename__ = 'blogs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    blog_id = db.Column(db.Integer)
+    blog_title = db.Column(db.String(255))
+    blog_content = db.Column(db.String(255))
+    blog_category = db.Column(db.String(255), index=True, nullable=False)
+    blog_date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_blogs(cls, id):
+        blogs = Blog.query.filter_by(pitch_id=id).all()
+        return blogs
