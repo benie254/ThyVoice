@@ -60,3 +60,15 @@ class Blog(db.Model):
     def get_blogs(cls, id):
         blogs = Blog.query.filter_by(pitch_id=id).all()
         return blogs
+
+
+class Comment(db.Model):
+    """
+    defines Comment objects
+    """
+
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+
+    def __repr__(self):
+        return f"Comment : id: {self.id} comment: {self.description}"
