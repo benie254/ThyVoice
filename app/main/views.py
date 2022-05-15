@@ -3,7 +3,7 @@ from . import main
 from flask_login import login_required,current_user
 from .. import db,photos
 from ..models import User,Blog,Comment
-from .forms import BlogForm,CommentForm
+from .forms import BlogForm,CommentForm,UpdateProfile
 from ..requests import get_quotes
 
 
@@ -47,6 +47,28 @@ def profile(uname):
         abort(404)
 
     return render_template('profile/profile.html',user=user,user_blogs=user_blogs)
+
+
+@main.route('/user/<uname>/update',methods=['GET','POST'])
+@login_required
+def update_profile(uname):
+
+    user = User.query.filter_by(username=uname).first()
+
+    if user is None:
+        abort(404)
+
+    update_form = UpdateProfile()
+
+    if update_form.validate_on_submit():
+        user.bio = update_form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+
+    return render_template('profile/update.html',user=user,update_form=update_form)
 
 
 @main.route('/create', methods=['GET', 'POST'])
