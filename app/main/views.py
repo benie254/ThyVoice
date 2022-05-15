@@ -3,7 +3,7 @@ from . import main
 from flask_login import login_required,current_user
 from .. import db,photos
 from ..models import User,Blog,Comment
-from .forms import BlogForm,CommentForm,UpdateProfile
+from .forms import BlogForm,CommentForm,UpdateProfile,UpdateBlog
 from ..requests import get_quotes
 
 
@@ -69,6 +69,31 @@ def update_profile(uname):
         return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',user=user,update_form=update_form)
+
+
+@main.route('/user/<user_id>/update',methods=['GET','POST'])
+@login_required
+def update_blog(user_id):
+
+    # user = User.query.filter_by(username=uname).first()
+    user_blog = Blog.query.filter_by(user_id=user_id).first()
+    user_id = current_user._get_current_object().id
+    user_blogs = Blog.query.filter_by(user_id=user_id).all()
+
+    if user_blog is None:
+        abort(404)
+
+    update_blog = UpdateBlog()
+
+    if update_blog.validate_on_submit():
+        user_blog.blog_content = update_blog.blog_content.data
+
+        db.session.add(user_blog)
+        db.session.commit()
+
+        return redirect(url_for('.profile',user_id=user_id,user_blog=user_blog,user_blogs=user_blogs))
+
+    return render_template('profile/update_blog.html',user_id=user_id,user_blog=user_blog,user_blogs=user_blogs,update_blog=update_blog)
 
 
 @main.route('/create', methods=['GET', 'POST'])
