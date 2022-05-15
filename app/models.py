@@ -83,3 +83,14 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f"Comment : id: {self.id} comment: {self.comment_message}"
+
+
+class Quote:
+    """
+    defines Quote objects
+    """
+
+    id = db.Column(db.Integer, primary_key=True)
+    quote_id = db.Column(db.Integer)
+    quote_author = db.Column(db.String(255))
+    quote_message = db.Column(db.String(255))
