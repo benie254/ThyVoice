@@ -90,6 +90,8 @@ class Quote:
     defines Quote objects
     """
 
+    __tablename__ = 'quotes'
+
     id = db.Column(db.Integer, primary_key=True)
     quote_id = db.Column(db.Integer)
     quote_author = db.Column(db.String(255))
