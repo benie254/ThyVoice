@@ -45,6 +45,7 @@ def profile(uname):
 
 
 @main.route('/feed', methods=['GET', 'POST'])
+@login_required
 def feed():
     """
     :return: index page + data
@@ -66,11 +67,9 @@ def feed():
 
         return redirect(url_for('main.index'))
 
-
-
     title = 'Feed- ThyVoice!'
 
-    return render_template('feed.html',title=title)
+    return render_template('feed.html',title=title,blogs=blogs)
 
 
 
