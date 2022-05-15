@@ -44,7 +44,7 @@ def profile(uname):
     return render_template('profile/profile.html',user=user,user_blogs=user_blogs)
 
 
-@main.route('/feed', methods=['GET', 'POST'])
+@main.route('/create', methods=['GET', 'POST'])
 @login_required
 def feed():
     """
@@ -67,9 +67,9 @@ def feed():
 
         return redirect(url_for('main.index'))
 
-    title = 'Feed- ThyVoice!'
+    title = 'Create Blog- ThyVoice!'
 
-    return render_template('feed.html',title=title,blogs=blogs)
+    return render_template('create.html',title=title,blogs=blogs)
 
 
 
