@@ -28,7 +28,7 @@ def index():
 
         return redirect(url_for('.index'))
 
-    return render_template('index.html',title=title,blogs=blogs,comments=comments)
+    return render_template('index.html',title=title,blogs=blogs,comments=comments,comment_form=comment_form)
 
 
 @main.route('/user/<uname>')
