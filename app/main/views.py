@@ -2,7 +2,7 @@ from flask import render_template,redirect,url_for,request,abort
 from . import main
 from flask_login import login_required,current_user
 from .. import db,photos
-from ..models import User,Blog
+from ..models import User,Blog,Comment
 from .forms import BlogForm,CommentForm
 
 
@@ -15,11 +15,12 @@ def index():
 
     title = 'ThyVoice- Welcome!'
 
+    blogs = Blog.query_all()
     comment_form = CommentForm()
     comments = Comment.query.all()
 
     if comment_form.validate_on_submit():
-        comment_message = comment_form.message.data
+        comment_message = comment_form.comment.data
         comment = Comment(comment_message=comment_message)
 
         db.session.add(comment)
@@ -27,7 +28,7 @@ def index():
 
         return redirect(url_for('.index'))
 
-    return render_template('index.html',title=title,comments=comments)
+    return render_template('index.html',title=title,blogs=blogs,comments=comments)
 
 
 @main.route('/user/<uname>')
