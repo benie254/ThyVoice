@@ -30,3 +30,16 @@ class UpdateProfile(FlaskForm):
 
     bio = TextAreaField('Tell us about you.', validators=[InputRequired()])
     submit = SubmitField('Update Profile')
+
+
+class UpdateBlog(FlaskForm):
+    """
+    updates user blogs
+    """
+
+    blog_title = StringField('Title',validators=[InputRequired()])
+    blog_content = TextAreaField('Blog content',validators=[InputRequired()])
+    blog_category = SelectField('Category',
+                                choices=['poetry', 'fiction', 'nonfiction', 'business', 'lifestyle', 'home&living',
+                                         'one-liners'],validators=[InputRequired()])
+    submit = SubmitField('Update blog')
