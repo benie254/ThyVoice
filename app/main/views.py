@@ -36,11 +36,12 @@ def profile(uname):
 
     user = User.query.filter_by(username=uname).first()
     user_id = current_user._get_current_object().id
+    user_blogs = Blog.query.filter_by(user_id=user_id).all()
 
     if user is None:
         abort(404)
 
-    return render_template('profile/profile.html',user=user)
+    return render_template('profile/profile.html',user=user,user_blogs=user_blogs)
 
 
 @main.route('/feed', methods=['GET', 'POST'])
