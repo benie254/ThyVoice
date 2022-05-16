@@ -3,7 +3,7 @@ from . import main
 from flask_login import login_required,current_user
 from .. import db,photos
 from ..models import User,Blog,Comment
-from .forms import BlogForm,CommentForm,UpdateProfile,UpdateBlog
+from .forms import BlogForm,CommentForm,UpdateProfile,UpdateBlog,DeleteBlog
 from ..requests import get_quotes
 
 
@@ -16,11 +16,14 @@ def index():
 
     title = 'ThyVoice- Welcome!'
 
-    blogs = Blog.query.all()
+
+    # blogs = Blog.query.all()
+    blogs = db.session.query(Blog).order_by(Blog.blog_title.desc())
     comment_form = CommentForm()
     comments = Comment.query.all()
 
     my_quotes = get_quotes()
+
 
     print(my_quotes)
 
@@ -33,25 +36,33 @@ def index():
 
         return redirect(url_for('.index'))
 
+
     return render_template('index.html',title=title,blogs=blogs,comments=comments,comment_form=comment_form,my_quotes=my_quotes)
+
+
+
+
 
 
 @main.route('/user/<uname>')
 def profile(uname):
 
+
     user = User.query.filter_by(username=uname).first()
     user_id = current_user._get_current_object().id
     user_blogs = Blog.query.filter_by(user_id=user_id).all()
+    user_blog = Blog.query.filter_by(user_id=uname).first()
 
     if user is None:
         abort(404)
 
-    return render_template('profile/profile.html',user=user,user_blogs=user_blogs)
+    return render_template('profile/profile.html',user=user,user_blogs=user_blogs,user_id=user_id,user_blog=user_blog)
 
 
 @main.route('/user/<uname>/update',methods=['GET','POST'])
 @login_required
 def update_profile(uname):
+
 
     user = User.query.filter_by(username=uname).first()
 
@@ -72,13 +83,12 @@ def update_profile(uname):
 
 
 @main.route('/user/<uname>/update_blog',methods=['GET','POST'])
-@login_required
 def update_blog(uname):
 
     user = User.query.filter_by(username=uname).first()
-    # user_blog = Blog.query.filter_by(blog_content=blog_content).first()
     user_id = current_user._get_current_object().id
-    user_blogs = Blog.query.filter_by(user_id=user_id).all()
+    user_blog = Blog.query.filter_by(user_id=uname).first()
+
 
     if user is None:
         abort(404)
@@ -86,14 +96,25 @@ def update_blog(uname):
     update_blog = UpdateBlog()
 
     if update_blog.validate_on_submit():
-        user.blog_content = update_blog.blog_content.data
+        user_blog.blog_title = update_blog.blog_title.data
+        user_blog.blog_content = update_blog.blog_content.data
+        user_blog.blog_category = update_blog.blog_category.data
 
-        db.session.add(user)
+        db.session.add(user_blog)
         db.session.commit()
 
-        return redirect(url_for('.profile',user_id=user_id,user_blog=user,user_blogs=user_blogs,uname=user.username))
+        return redirect(url_for('.profile',uname=user.username))
 
-    return render_template('profile/update_blog.html',user_id=user_id,user_blog=user,user_blogs=user_blogs,update_blog=update_blog,uname=user.username)
+    delete_blog = DeleteBlog()
+
+    if delete_blog.validate_on_submit():
+        db.session.delete(user_blog)
+        db.session.commit()
+
+        return redirect(url_for('.profile', uname=user.username))
+
+    return render_template('profile/update_blog.html',user=user,update_blog=update_blog,user_id=user_id,delete_blog=delete_blog)
+
 
 
 @main.route('/create', methods=['GET', 'POST'])

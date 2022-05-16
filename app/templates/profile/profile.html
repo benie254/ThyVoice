@@ -44,10 +44,10 @@
         <div class="pitches text-center" style="margin-top:2.5%;">
             <h5 style="font-family: 'Cinzel'">Title: {{i.blog_title}}</h5>
             <h6 style="font-family: 'Secular One';"><span style="font-family: 'Cinzel'">Message:</span> {{i.blog_content}}</h6>
-        </div>
-     <a href="{{ url_for('.update_blog',uname=user.username) }}" style="margin-top:1.5%;font-family:'Secular One'">
-            Edit Profile
+            <a href="{{ url_for('main.update_blog',uname=user.username) }}" style="margin-top:1.5%;font-family:'Secular One'">
+            Edit Blog
           </a>
+        </div>
 
 
         {%endfor%}

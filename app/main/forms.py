@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, TextAreaField, StringField, SelectField
+from sqlalchemy import Integer
+from wtforms import SubmitField, TextAreaField, StringField, SelectField, IntegerField
 from wtforms.validators import InputRequired
 
 
@@ -43,3 +44,12 @@ class UpdateBlog(FlaskForm):
                                 choices=['poetry', 'fiction', 'nonfiction', 'business', 'lifestyle', 'home&living',
                                          'one-liners'],validators=[InputRequired()])
     submit = SubmitField('Update blog')
+
+
+class DeleteBlog(FlaskForm):
+    """
+    updates user blogs
+    """
+
+    blog_title = StringField('Title',validators=[InputRequired()])
+    submit = SubmitField('Delete blog')
