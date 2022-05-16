@@ -151,9 +151,7 @@ def subscribe():
     subscription_form = SubscriptionForm()
 
     if subscription_form.validate_on_submit():
-        user = User(email=subscription_form.email.data,password=subscription_form.password.data)
-        db.session.add(user)
-        db.session.commit()
+        user = User(email=subscription_form.email.data)
 
         mail_message("Your Subscription","email/subscribe_user",user.email,user=user)
 
