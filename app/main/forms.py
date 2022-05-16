@@ -61,15 +61,4 @@ class SubscriptionForm(FlaskForm):
         signs in existing users
         """
         email = StringField('Email...', validators=[InputRequired(), Email()])
-        password = PasswordField('Password...', validators=[InputRequired()])
         submit = SubmitField('Subscribe')
-
-
-        def validate_email(self,data_field):
-            """
-            :param data_field: email data
-            :return: validated address--checks if an account exists
-            """
-
-            if User.query.filter_by(email=data_field.data).first():
-                raise ValidationError('Your account has an active subcription')
