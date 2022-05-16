@@ -3,8 +3,9 @@ from . import main
 from flask_login import login_required,current_user
 from .. import db,photos
 from ..models import User,Blog,Comment
-from .forms import BlogForm,CommentForm,UpdateProfile,UpdateBlog,DeleteBlog
+from .forms import BlogForm,CommentForm,UpdateProfile,UpdateBlog,DeleteBlog,SubscriptionForm
 from ..requests import get_quotes
+from ..email import mail_message
 
 
 # views
@@ -145,5 +146,19 @@ def create():
     return render_template('create.html',title=title,blogs=blogs,blog_form=blog_form)
 
 
+@main.route('/subscribe',methods=['GET','POST'])
+def subscribe():
+    subscription_form = SubscriptionForm()
 
+    if subscription_form.validate_on_submit():
+        user = User(email=subscription_form.email.data,password=subscription_form.password.data)
+        db.session.add(user)
+        db.session.commit()
 
+        mail_message("Your Subscription","email/subscribe_user",user.email,user=user)
+
+        return redirect(url_for('.index'))
+
+    title = 'Subscription'
+
+    return render_template('subscribe.html',subscription_form=subscription_form,title=title)
