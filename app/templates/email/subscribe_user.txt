@@ -1,0 +1,16 @@
+Hello {{user.username}},
+
+
+You are subscribed!
+
+
+We have just noticed you signed up for the latest blog updates and we are delighted 😀
+
+Welcome to the fam, this is where stories live, and people talk...cheers!
+
+
+Best wishes,
+
+B.L,
+
+Benson Lang'at.
