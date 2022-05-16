@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from sqlalchemy import Integer
-from wtforms import SubmitField, TextAreaField, StringField, SelectField, IntegerField
-from wtforms.validators import InputRequired
+from wtforms import SubmitField, TextAreaField, StringField, SelectField, PasswordField
+from wtforms.validators import InputRequired, Email, ValidationError
+from ..models import User
 
 
 class BlogForm(FlaskForm):
@@ -53,3 +54,22 @@ class DeleteBlog(FlaskForm):
 
     blog_title = StringField('Title',validators=[InputRequired()])
     submit = SubmitField('Delete blog')
+
+
+class SubscriptionForm(FlaskForm):
+        """
+        signs in existing users
+        """
+        email = StringField('Email...', validators=[InputRequired(), Email()])
+        password = PasswordField('Password...', validators=[InputRequired()])
+        submit = SubmitField('Subscribe')
+
+
+        def validate_email(self,data_field):
+            """
+            :param data_field: email data
+            :return: validated address--checks if an account exists
+            """
+
+            if User.query.filter_by(email=data_field.data).first():
+                raise ValidationError('Your account has an active subcription')
