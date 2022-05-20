@@ -11,6 +11,7 @@ class BlogForm(FlaskForm):
     """
 
     blog_title = StringField('Title')
+    blog_description = StringField('Description')
     blog_content = TextAreaField('Blog content')
     blog_category = SelectField('Category', choices=['poetry', 'fiction', 'nonfiction', 'business', 'lifestyle','home&living','one-liners'])
     submit = SubmitField('Post blog')
@@ -39,9 +40,9 @@ class UpdateBlog(FlaskForm):
     updates user blogs
     """
 
-    blog_title = StringField('Title',validators=[InputRequired()])
-    blog_content = TextAreaField('Blog content',validators=[InputRequired()])
-    blog_category = SelectField('Category',
+    new_blog_title = StringField('Title',validators=[InputRequired()])
+    new_blog_content = TextAreaField('Blog content',validators=[InputRequired()])
+    new_blog_category = SelectField('Category',
                                 choices=['poetry', 'fiction', 'nonfiction', 'business', 'lifestyle', 'home&living',
                                          'one-liners'],validators=[InputRequired()])
     submit = SubmitField('Update blog')
@@ -49,11 +50,16 @@ class UpdateBlog(FlaskForm):
 
 class DeleteBlog(FlaskForm):
     """
-    updates user blogs
+    deletes user blogs
     """
-
-    blog_title = StringField('Title',validators=[InputRequired()])
     submit = SubmitField('Delete blog')
+    
+
+class DeleteComment(FlaskForm):
+    """
+    deletes comments
+    """
+    submit = SubmitField('Delete comment')
 
 
 class SubscriptionForm(FlaskForm):

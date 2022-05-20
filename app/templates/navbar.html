@@ -16,11 +16,6 @@
                         Home
                     </a>
                 </li>
-                <li>
-                    <a href="/create" style="font-family:'Secular One';font-size:18px;">
-                        Create Blog
-                    </a>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
@@ -28,7 +23,12 @@
                     {{ current_user.username }}
                 </li>
                 <li>
-                    <a href="{{ url_for('main.profile',uname=current_user.username) }}" style="font-family:'Secular One';font-size:18px;">
+                    <a href="{{url_for('main.create')}}" style="font-family:'Secular One';font-size:18px;">
+                        Create Blog
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('main.profile',uname=current_user.username,id=current_user.id) }}" style="font-family:'Secular One';font-size:18px;">
                         Blogger Profile
                     </a>
                 </li>

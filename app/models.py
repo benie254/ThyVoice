@@ -13,6 +13,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
     username = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True, index=True)
     bio = db.Column(db.String(255))
@@ -51,8 +52,10 @@ class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     blog_id = db.Column(db.Integer)
     blog_title = db.Column(db.String(255))
-    blog_content = db.Column(db.String(255))
+    blog_description = db.Column(db.String(255))
+    blog_content = db.Column(db.String(2500))
     blog_category = db.Column(db.String(255), index=True, nullable=False)
+    blog_pic_path = db.Column(db.String())
     blog_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

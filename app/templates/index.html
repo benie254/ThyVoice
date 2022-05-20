@@ -10,67 +10,53 @@
 
 
 
-{%block content%}
+{%block content%} 
+
+
+<body style="background-color:#E3C16F;">
+  
+</body>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
 
 
 <div class="container">
-    {% for blog in blogs %}
+  <div class="card" style="margin-bottom:2.5%;">
+    <div class="card-header">
+    Random Quote
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>{{my_quotes.quote}}</p>
+        <a href="{{my_quotes.permalink}}"><footer><cite title="Source Title">Visit source</cite></footer></a>
+      </blockquote>
+    </div>
+  </div>
 
-  <div class="col-sm-4 text-center">
-    <div class="card" style="float:right;">
-      <div class="card-body">
-        <h3 class="card-title" style="font-style:bold;">{{blog.blog_title}}</h3>
-        <h5 class="card-title">category: {{blog.blog_category}}</h5>
-        <p class="card-text" style="padding:2%;">{{blog.blog_content}}</p>
-        <div class="card-footer">
-          {% if comments %}
-          <div class="row" style="margin-top:2.5%;">
-            <div class="col-md-4" >
-              <button class="accordion btn">All Comments</button>
-              <div class="panel">
-                {%for comment in comments%}
-                <p style="padding-top:15%;color:black;">
-                  <strong>comnt:</strong> {{comment.comment_message}}
-                </p>
-                {%endfor%}
-              </div>
-            </div>
-            <div class="col-md-4">
-              <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
-            </div>
-            <div class="col-md-4">
-              <button class="accordion btn">Comment</button>
-              <div class="panel">
-                <div class="panel" style="padding-top:10%;width:150%;">
-                  {{wtf.quick_form(comment_form)}}
-                </div>
-              </div>
-            </div>
-            {%else%}
-            <div class="col-md-6">
-              <i onclick="myFunction(this)" class="fa fa-thumbs-up" style="font-size: 50px;"></i>
-            </div>
-            <div class="col-md-6">
-              <p> No comments yet. </p>
-              <div class="col-md-6" style="width:100%">
-                {{wtf.quick_form(comment_form)}}
-              </div>
-            </div>
-          </div>
-          {%endif%}
-        </div>
-      </div>
+  <h1 style="text-align:center;margin-bottom:0.5%;">Blog Feed</h1>
+    {% for blog in blogs %} 
+    
+  <div class="card text-center" style="margin-bottom:5%">
+    <div class="card-header">
+      category: {{blog.blog_category}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{blog.blog_title}}</h5>
+      <p class="card-text">{{blog.blog_description}}</p>
+      <a href="{{url_for('main.blog',id=blog.id)}}" class="btn btn-primary">Read more</a> <a href="{{url_for('main.subscribe')}}" class="btn btn-success">Subscribe</a>
+    </div>
+    <div class="card-footer text-muted">
+     published 2 days ago
     </div>
   </div>
 
 {% endfor %}
 
-
-  <h3>{{my_quotes.quote}}</h3>
-  <h5>{{my_quotes.author}}</h5>
-  <h6><a href="{{my_quotes.permalink}}">visit source</a></h6>
-
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 
 
 {%endblock%}

@@ -1,5 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+{% import 'bootstrap/wtf.html' as wtf %} 
 
-{% block content %}
-<h1>Update Profile Page works!</h1>
+
+{% block content %} 
+
+<body style="background-color:#FAFF70;">
+  
+</body>
+
+<div class="container" style="margin-top:5%">
+    <h1 style="margin-bottom:2.5%;text-align:center;">Edit Profile</h1>
+    {{ wtf.quick_form(update_form) }}
+</div>
+
+
 {% endblock %}
