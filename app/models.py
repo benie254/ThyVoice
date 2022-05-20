@@ -48,7 +48,6 @@ class Blog(db.Model):
     """
 
     __tablename__ = 'blogs'
-    __table_args__ = {"schema":"schema_name"}
 
     id = db.Column(db.Integer, primary_key=True)
     blog_id = db.Column(db.Integer)
