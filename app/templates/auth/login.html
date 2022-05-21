@@ -3,32 +3,21 @@
 
 
 {% block content %}
+<body style="background-color:#EEFFDB;">
 
+</body>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-2"></div>
 
-        <div class="col-md-8">
-<!--flash message-->
-
-            {% for message in get_flashed_messages() %}
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">
-                    &times;
-                </button>
-                {{ message }}
-            </div>
-            {% endfor %}
-
-<!--login form-->
-
-            {{ wtf.quick_form(login_form) }}
-
-            <p> Don't have an account? <a href="{{ url_for('auth.register') }}"> Sign up here </a> </p>
+        <div class="col-md-6">
+            <div style="margin-top:2.5%;margin-left:35%;padding-top:60.000%;position:relative;"><iframe src="https://gifer.com/embed/bf6" width="65%" height="60%" style='position:absolute;top:0;left:0;' frameBorder="0" allowFullScreen></iframe></div>
         </div>
 
-        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            {{ wtf.quick_form(login_form) }}
+            <p> Don't have an account? <a href="{{ url_for('auth.register') }}"> Sign up here </a> </p>
+        </div>
     </div>
 </div>
 
