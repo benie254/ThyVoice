@@ -1,4 +1,6 @@
-
+*{
+font-size: 16px;
+}
 
 .accordion {
     background-color: #eee;
