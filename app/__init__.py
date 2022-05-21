@@ -7,6 +7,9 @@ from flask_uploads import UploadSet,configure_uploads,IMAGES
 from flask_mail import Mail
 
 
+# FLASK_APP='app:create_app(args)'
+
+
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 
@@ -21,6 +24,8 @@ mail = Mail()
 def create_app(config_name):
     # initialize app
     app = Flask(__name__)
+
+    # FLASK_APP = 'app:create_app(args)'
 
     # create app configs
     app.config.from_object(config_options[config_name])
