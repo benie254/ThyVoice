@@ -15,11 +15,11 @@ ThyVoice is a blogging app for people who love to write and those who enjoy read
 
 ## Screenshot
 
-<img src="https://user-images.githubusercontent.com/99865051/168407909-9fe76430-7b5c-442f-b76e-f75d1ba6af1e.png" >
+<img src="https://user-images.githubusercontent.com/99865051/169643412-c090927a-c0a4-4e99-b95d-1318113752c7.png" >
 
 ## Screenshot #2
 
-<img src="https://user-images.githubusercontent.com/99865051/168407922-023079e5-1e2e-4d51-b66a-079099abfe22.png">
+<img src="https://user-images.githubusercontent.com/99865051/169643485-95d7823e-9918-46d5-98bb-ae47b7453869.png">
 
 ## Behavior Driven Development--BDD
 
