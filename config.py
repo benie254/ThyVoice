@@ -30,11 +30,12 @@ class ProdConfig(Config):
     production configuration child class
     """
 
-    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 
     # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://benie:12345@localhost/thyvoice'
     
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")  # the only problem with this is that it connects to heroku's postgres, which has since been updated by sqlalchemy to be postgresql. The logic in the line with replace, if you check closely, is that it requests heroku to change the name from postgres:// to instead include ql at the end, so that it reads postgresql://
+    #  another line that could work well to replace postgres with postgresql is this: os.environ.get('DATABASE_URL?sslmode=require').replace('postgres://', 'postgresql://')
 
     DEBUG = True
 
