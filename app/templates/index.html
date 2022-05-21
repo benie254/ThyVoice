@@ -13,7 +13,7 @@
 {%block content%} 
 
 
-<body style="background-color:#E3C16F;">
+<body style="background-color:#E3C16F;background-image:url({{url_for('static',filename='photos/tree-1551106_1920.jpg')}});background-position:cover;background-size:cover;background-repeat:no-repeat;">
   
 </body>
 
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <h1 style="text-align:center;margin-bottom:0.5%;">Blog Feed</h1>
+  <h1 style="text-align:center;margin-bottom:0.5%;color:white;">Blog Feed</h1>
     {% for blog in blogs %} 
     
   <div class="card text-center" style="margin-bottom:5%">

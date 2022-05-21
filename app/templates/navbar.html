@@ -7,40 +7,40 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color:#FFFACC;font-family:'Oleo Script Swash Caps';font-size:36px;"> ThyVoice </a>
+            <a class="navbar-brand" href="/" style="color:#FFFACC;font-family:'Tapestry';font-size:36px;margin-top:2%;"> ThyVoice </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/" style="font-family:'Permanent Marker';font-size:25px;">
+                    <a href="/" style="font-family:'Tapestry';font-size:25px;">
                         Home
                     </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
-                <li style="color:#FFFACC;padding:15px;font-family:'Secular One';font-size:18px;">
+                <li style="color:#FFFACC;padding:15px;font-family:'Skranji';font-size:18px;">
                     {{ current_user.username }}
                 </li>
                 <li>
-                    <a href="{{url_for('main.create')}}" style="font-family:'Secular One';font-size:18px;">
+                    <a href="{{url_for('main.create')}}" style="font-family:'Skranji';font-size:18px;">
                         Create Blog
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url_for('main.profile',uname=current_user.username,id=current_user.id) }}" style="font-family:'Secular One';font-size:18px;">
+                    <a href="{{ url_for('main.profile',uname=current_user.username,id=current_user.id) }}" style="font-family:'Skranji';font-size:18px;">
                         Blogger Profile
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ url_for('auth.logout') }}" style="font-family:'Secular One';font-size:18px;">
+                    <a href="{{ url_for('auth.logout') }}" style="font-family:'Tapestry';font-size:18px;">
                         Sign out
                     </a>
                 </li>
                 {% else %}
                 <li>
-                    <a href="{{ url_for('auth.login') }}" style="font-family:'Secular One';font-size:18px;">
+                    <a href="{{ url_for('auth.login') }}" style="font-family:'Tapestry';font-size:18px;">
                         Sign in
                     </a>
                 </li>
