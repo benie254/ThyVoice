@@ -34,6 +34,7 @@ def index():
 
 
 @main.route('/user/<uname>/')
+@login_required
 def profile(uname):
 
 
@@ -71,6 +72,7 @@ def update_profile(uname):
 
 
 @main.route('/user/<uname>/<id>/update_blog',methods=['GET','POST'])
+@login_required
 def update_blog(uname,id):
 
     user = User.query.filter_by(username=uname).first()
