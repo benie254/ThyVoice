@@ -176,6 +176,7 @@ def subscribe():
 
 
 @main.route('/blog/<int:id>', methods=['GET', 'POST'])
+@login_required
 def blog(id):
     """
     :return: blog feed page + data
